@@ -1,7 +1,8 @@
 @extends('layouts.index')
+@section('title','Регистрация')
 @section('content')
 
-    <form action="{{route('register.reg')}}" class="form-signup" method="post">
+    <form action="{{route('register.register')}}" class="form-signup" method="post">
         @if (!empty($messages))
             <div class="alert alert-danger alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

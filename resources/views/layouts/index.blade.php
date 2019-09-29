@@ -31,7 +31,7 @@
         }
     </style>
 
-    <title>Стена сообщений | Главная страница</title>
+    <title>Стена сообщений | @yield('title')</title>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -40,10 +40,15 @@
             <a class="navbar-brand" href="{{route('main')}}">Avtocod | Стена сообщений</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="{{route('main')}}">Главная</a></li>
+            <li{{ Route::currentRouteName()=='main' ? ' class=active' : '' }}>
+                <a href="{{route('main')}}">Главная</a>
+            </li>
             @if(!Auth::check())
-                <li><a href="{{route('login.showLoginForm')}}">Авторизация</a></li>
-                <li><a href="{{route('register.name')}}">Регистрация</a></li>
+                <li {{ Route::currentRouteName()=='login.showLoginForm' ? 'class=active' : '' }}>
+                    <a href="{{route('login.showLoginForm')}}">Авторизация</a></li>
+                <li {{ Route::currentRouteName()=='register.index' ? 'class=active' : '' }}>
+                    <a href="{{route('register.index')}}">Регистрация</a>
+                </li>
             @endif
         </ul>
         @if(Auth::check())

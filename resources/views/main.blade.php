@@ -1,4 +1,5 @@
 @extends('layouts.index')
+@section('title','Главная страница')
 @section('content')
     <div class="page-header">
         <h1>Сообщения от всех пользователей</h1>

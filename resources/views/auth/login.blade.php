@@ -1,4 +1,5 @@
 @extends('layouts.index')
+@section('title','Авторизация')
 @section('content')
     <form action="{{route('login.login')}}" class="form-signin" method="post">
         {{ csrf_field() }}

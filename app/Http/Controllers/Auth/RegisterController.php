@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+  //  protected $redirectTo = '/';
 
     private $data = [];
 
@@ -49,15 +49,18 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request) {
-
         $data = $request->all();
-        $validator = $this->validator($request->all($data));
+        $validator = $this->validator($data);
         if ($validator->fails()) {
             $this->data['messages'] = $validator->messages();
             return $this->index();
         }
         $this->create($data);
-        return redirect()->route('main');
+        return redirect()->route('register.success');
+    }
+
+    public function success(){
+        return view('auth.success', $this->data);
     }
 
     /**
@@ -68,7 +71,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data) {
         return Validator::make($data, [
-            'name' => 'required|string|max:255|min:6|regex:/^\S*(?=\S*[a-z])(?=\S*[\d])\S*$/i',
+            'name' => 'required|string|max:255|min:6|unique:users|regex:/^\S*(?=\S*[a-z])(?=\S*[\d])\S*$/i',
             'password' => 'required|string|min:6|confirmed|regex:/^\S*(?=\S*[a-z])(?=\S*[\d])\S*$/',
         ]);
     }
