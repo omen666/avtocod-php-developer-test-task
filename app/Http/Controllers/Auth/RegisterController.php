@@ -29,7 +29,9 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
+
+    private $data = [];
 
     /**
      * Create a new controller instance.
@@ -43,7 +45,7 @@ class RegisterController extends Controller
 
 
     public function index() {
-        return view('register');
+        return view('auth.register', $this->data);
     }
 
     public function register(Request $request) {
@@ -51,7 +53,8 @@ class RegisterController extends Controller
         $data = $request->all();
         $validator = $this->validator($request->all($data));
         if ($validator->fails()) {
-            return view('register', ['messages' => $validator->messages()]);
+            $this->data['messages'] = $validator->messages();
+            return $this->index();
         }
         $this->create($data);
         return redirect()->route('main');

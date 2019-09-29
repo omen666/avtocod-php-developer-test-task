@@ -34,21 +34,24 @@
     <title>Стена сообщений | Главная страница</title>
 </head>
 <body>
-
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Avtocod | Стена сообщений</a>
+            <a class="navbar-brand" href="{{route('main')}}">Avtocod | Стена сообщений</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Главная</a></li>
-            <li><a href="#">Авторизация</a></li>
-            <li><a href="#">Регистрация</a></li>
+            <li class="active"><a href="{{route('main')}}">Главная</a></li>
+            @if(!Auth::check())
+                <li><a href="{{route('login.showLoginForm')}}">Авторизация</a></li>
+                <li><a href="{{route('register.name')}}">Регистрация</a></li>
+            @endif
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="navbar-text"><span class="glyphicon glyphicon-user"></span> %username%</li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Выход</a></li>
-        </ul>
+        @if(Auth::check())
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navbar-text"><span class="glyphicon glyphicon-user"></span> {{Auth::user()->name}}</li>
+                <li><a href="{{route('login.logout')}}"><span class="glyphicon glyphicon-log-out"></span> Выход</a></li>
+            </ul>
+        @endif
     </div>
 </nav>
 

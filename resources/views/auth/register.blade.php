@@ -1,13 +1,18 @@
 @extends('layouts.index')
 @section('content')
-    @if (!empty($messages))
-        <ul>
-            @foreach ($messages->all() as $message)
-                <li>{{$message}}</li>
-            @endforeach
-        </ul>
-    @endif
+
     <form action="{{route('register.reg')}}" class="form-signup" method="post">
+        @if (!empty($messages))
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <ul>
+                    @foreach ($messages->all() as $message)
+                        <li>{{$message}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         {{ csrf_field() }}
         <h2 class="form-signup-heading">Регистрация</h2>
 
@@ -18,7 +23,8 @@
         <input type="password" name="password" id="user_password" class="form-control" placeholder="Пароль" required>
 
         <label for="user_password_repeat" class="sr-only">Повторите пароль</label>
-        <input type="password" name="password_confirmation" id="user_password_repeat" class="form-control" placeholder="Пароль (ещё раз)" required>
+        <input type="password" name="password_confirmation" id="user_password_repeat" class="form-control"
+               placeholder="Пароль (ещё раз)" required>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
     </form>
