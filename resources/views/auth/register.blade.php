@@ -1,13 +1,12 @@
 @extends('layouts.index')
 @section('title','Регистрация')
 @section('content')
-
     <form action="{{route('register.register')}}" class="form-signup" method="post">
-        @if (!empty($messages))
+        @if($errors->any())
             <div class="alert alert-danger alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <ul>
-                    @foreach ($messages->all() as $message)
+                  @foreach ($errors->all() as $message)
                         <li>{{$message}}</li>
                     @endforeach
                 </ul>

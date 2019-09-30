@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-  //  protected $redirectTo = '/';
+    //  protected $redirectTo = '/';
 
     private $data = [];
 
@@ -39,7 +39,8 @@ class RegisterController extends Controller
      * @return void
      */
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('guest');
     }
 
@@ -49,7 +50,8 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index() {
+    public function index()
+    {
         return view('auth.register', $this->data);
     }
 
@@ -58,12 +60,12 @@ class RegisterController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         $data = $request->all();
         $validator = $this->validator($data);
         if ($validator->fails()) {
-            $this->data['messages'] = $validator->messages();
-            return $this->index();
+            return redirect()->route('register.index')->withErrors($validator);
         }
         $this->create($data);
         return redirect()->route('register.success');
@@ -74,17 +76,19 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function success(){
+    public function success()
+    {
         return view('auth.success', $this->data);
     }
 
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data) {
+    protected function validator(array $data)
+    {
         return Validator::make($data, [
             'name' => 'required|string|max:255|min:6|unique:users|regex:/^\S*(?=\S*[a-z])(?=\S*[\d])\S*$/i',
             'password' => 'required|string|min:6|confirmed|regex:/^\S*(?=\S*[a-z])(?=\S*[\d])\S*$/',
@@ -94,11 +98,12 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array $data
+     * @param array $data
      *
      * @return \App\Models\Users
      */
-    protected function create(array $data) {
+    protected function create(array $data)
+    {
         return Users::create([
             'name' => $data['name'],
             'password' => Hash::make($data['password']),
