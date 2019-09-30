@@ -24,7 +24,7 @@ class MessagesController extends Controller
     {
         $data = $request->all();
         $message = Messages::find($data['id']);
-        if ($message->user_id == Auth::user()->id) {
+        if ($message->user_id == Auth::user()->id || Auth::user()->is_admin) {
             $message->delete();
         }
         return redirect()->route('main');

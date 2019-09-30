@@ -43,7 +43,7 @@
                             </p>
                         </div>
                         <div class="col-md-1 col-xs-2">
-                            @if(Auth::check() && $message->user->id==Auth::user()->id)
+                            @if(Auth::check() && ($message->user->id==Auth::user()->id || Auth::user()->is_admin))
                                 <form action="{{ route('messages.removeComment') }}" method="POST">
                                     @method('DELETE')
                                     @csrf
