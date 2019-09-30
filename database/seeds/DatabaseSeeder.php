@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Models\Users;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,6 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->times(\mt_rand(1, 5))->create();
+        factory(Users::class)->times(\mt_rand(1, 5))->create();
     }
 }

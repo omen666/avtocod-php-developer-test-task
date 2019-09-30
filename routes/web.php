@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'MainController@index')->name('main');
+Route::post('add_comment', 'MessagesController@addComment')->name('messages.addComment');
+Route::delete('remove_comment', 'MessagesController@removeComment')->name('messages.removeComment');
 Route::get('registration', 'Auth\RegisterController@index')->name('register.index');
 Route::post('registration', 'Auth\RegisterController@register')->name('register.register');
 Route::get('registration/success', 'Auth\RegisterController@success')->name('register.success');

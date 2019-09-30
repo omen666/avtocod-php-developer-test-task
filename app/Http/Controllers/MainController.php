@@ -9,10 +9,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Messages;
 
 class MainController extends Controller
 {
-    public function index(Request $request) {
-        return view('main');
+    public function index()
+    {
+        return view('main', [
+            'messages' => Messages::all()->sortByDesc('created_at')
+        ]);
     }
+
 }
