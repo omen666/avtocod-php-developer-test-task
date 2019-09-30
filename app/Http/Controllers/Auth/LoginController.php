@@ -38,6 +38,12 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * определяем колонку в таблице для взаимодействия с username
+     *
+     * @return string
+     */
+
     public function username()
     {
         return 'name';

@@ -44,10 +44,20 @@ class RegisterController extends Controller
     }
 
 
+    /**
+     * Функция выводит представления для стрницы регистрации
+     *
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function index() {
         return view('auth.register', $this->data);
     }
 
+    /**
+     * Регистрация пользователя
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function register(Request $request) {
         $data = $request->all();
         $validator = $this->validator($data);
@@ -59,6 +69,11 @@ class RegisterController extends Controller
         return redirect()->route('register.success');
     }
 
+    /**
+     * Функция выводит представления для стрницы успешной регистрации
+     *
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function success(){
         return view('auth.success', $this->data);
     }

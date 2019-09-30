@@ -13,6 +13,11 @@ use App\Models\Messages;
 
 class MainController extends Controller
 {
+    /**
+     * Функция выводит представления на главной странице с массивом отзывов
+     *
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function index()
     {
         return view('main', [
